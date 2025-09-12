@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chemistry Textbook</title>
+  <header>
+  <div class="wrap top">
+    <div class="logo">Simple Textbook</div>
+    <nav style="margin-left:auto; display:flex; gap:16px;">
+      <a href="index.html" style="color:rgb(20, 19, 19); text-decoration:none; font-weight:500;">Physics</a>
+      <a href="chemistry.html" style="color:rgb(26, 24, 24); text-decoration:none; font-weight:500;">Chemistry</a>
+      <a href="biology.html" style="color:rgb(20, 19, 19); text-decoration:none; font-weight:500;">Biology</a>
+    </nav>
+  </div>
+</header>
+  <style>
+    :root{--bg:#f7fafc;--card:#ffffff;--muted:#6b7280;--accent:#0ea5a4}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; margin:0; background:var(--bg); color:#111}
+    header{background:linear-gradient(90deg,#06b6d4,#60a5fa); color:#fff; padding:18px 20px}
+    .wrap{max-width:1000px;margin:20px auto;padding:0 16px}
+    .top{display:flex;align-items:center;gap:16px}
+    .logo{font-weight:700;font-size:1.15rem}
+    .search{margin-left:auto}
+    input[type=search]{padding:8px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);min-width:160px}
+
+    main{display:grid;grid-template-columns:250px 1fr;gap:18px;margin-top:16px}
+    nav{background:var(--card);border-radius:12px;padding:12px;border:1px solid rgba(0,0,0,0.04)}
+    .topic{padding:10px;border-radius:8px;cursor:pointer;margin-bottom:6px}
+    .topic:hover{background:rgba(2,6,23,0.03)}
+    .topic.active{background:linear-gradient(90deg,rgba(14,165,164,0.12),rgba(96,165,250,0.06));border-left:4px solid var(--accent);}
+
+    article{background:var(--card);border-radius:12px;padding:20px;border:1px solid rgba(0,0,0,0.04)}
+    h1{margin:0 0 8px}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:12px}
+    .example{background:#f1f5f9;padding:12px;border-radius:8px;margin-top:12px}
+
+    footer{max-width:1000px;margin:24px auto 80px;padding:0 16px;color:var(--muted);font-size:0.9rem}
+
+    @media (max-width:760px){main{grid-template-columns:1fr;}.search{display:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <div class="logo">Simple Biology Textbook</div>
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Search topics or keywords..." />
+      </div>
+    </div>
+  </header>
+ 
+  <div class="wrap">
+    <main>
+      <nav id="sidebar">
+        <!-- topics injected by JS -->
+      </nav>
+
+      <article id="content">
+        <!-- content injected by JS -->
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    bobbybee😂😊
+  </footer>
+
+  <script>
+    const topics = [
+      {
+        id: 'cells',
+        title: 'Cells – The Unit of Life',
+        summary: 'Structure and function of cells.',
+        content: `
+<p><strong>Cells</strong> are the basic structural and functional units of life.</p>
+<ul>
+  <li><strong>Prokaryotic cells:</strong> Simple cells without a nucleus (e.g. bacteria).</li>
+  <li><strong>Eukaryotic cells:</strong> Complex cells with a nucleus (e.g. plants, animals).</li>
+  <li>Organelles include nucleus, mitochondria, chloroplasts, ribosomes, etc.</li>
+</ul>
+<div class="example"><strong>Example:</strong> Which organelle is called the "powerhouse of the cell"?  
+<details><summary>Solution</summary>
+Answer: <strong>Mitochondria</strong> because they produce energy (ATP) by respiration.
+</details></div>
+        `
+      },
+      {
+        id: 'genetics',
+        title: 'Genetics & Heredity',
+        summary: 'DNA, genes, and inheritance.',
+        content: `
+<p><strong>Genetics</strong> is the study of heredity and variation.</p>
+<ul>
+  <li><strong>DNA:</strong> Carries genetic information.</li>
+  <li><strong>Gene:</strong> A segment of DNA coding for a trait.</li>
+  <li><strong>Alleles:</strong> Different forms of a gene (dominant/recessive).</li>
+</ul>
+<div class="example"><strong>Example:</strong> In peas, tall (T) is dominant over short (t). Cross Tt × Tt.  
+<details><summary>Solution</summary>
+Punnett square → TT, Tt, Tt, tt.  
+Ratio: 3 tall : 1 short.
+</details></div>
+        `
+      },
+      {
+        id: 'evolution',
+        title: 'Evolution',
+        summary: 'How organisms change over time.',
+        content: `
+<p><strong>Evolution</strong> explains how species change and adapt through natural selection.</p>
+<ul>
+  <li>Charles Darwin proposed natural selection as the mechanism of evolution.</li>
+  <li>Favorable traits help organisms survive and reproduce.</li>
+</ul>
+<div class="example"><strong>Example:</strong> Why do giraffes have long necks?  
+<details><summary>Solution</summary>
+Over generations, giraffes with longer necks survived better by reaching higher leaves → trait passed on.
+</details></div>
+        `
+      },
+      {
+        id: 'photosynthesis',
+        title: 'Photosynthesis',
+        summary: 'Process plants use to make food.',
+        content: `
+<p><strong>Photosynthesis</strong> converts sunlight into chemical energy:</p>
+<p>Equation: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</p>
+<div class="example"><strong>Example:</strong> Why are leaves green?  
+<details><summary>Solution</summary>
+Leaves contain <strong>chlorophyll</strong>, which absorbs red/blue light and reflects green light.
+</details></div>
+        `
+      },
+      {
+        id: 'human',
+        title: 'Human Body Systems',
+        summary: 'Major systems and their functions.',
+        content: `
+<p><strong>Systems of the human body:</strong></p>
+<ul>
+  <li><strong>Circulatory:</strong> Heart, blood vessels → transport nutrients & oxygen.</li>
+  <li><strong>Respiratory:</strong> Lungs → gas exchange.</li>
+  <li><strong>Digestive:</strong> Stomach, intestines → food breakdown.</li>
+  <li><strong>Nervous:</strong> Brain, nerves → control & communication.</li>
+</ul>
+<div class="example"><strong>Example:</strong> What organ pumps blood throughout the body?  
+<details><summary>Solution</summary>
+Answer: The <strong>heart</strong>.
+</details></div>
+        `
+      },
+      {
+        id: 'ecology',
+        title: 'Ecology',
+        summary: 'Interactions of organisms with environment.',
+        content: `
+<p><strong>Ecology</strong> studies ecosystems and energy flow.</p>
+<ul>
+  <li><strong>Producers:</strong> Plants.</li>
+  <li><strong>Consumers:</strong> Animals.</li>
+  <li><strong>Decomposers:</strong> Bacteria, fungi.</li>
+</ul>
+<div class="example"><strong>Example:</strong> Which trophic level has the most energy?  
+<details><summary>Solution</summary>
+Answer: <strong>Producers</strong>, because they capture energy from sunlight.
+</details></div>
+        `
+      },
+      {
+        id: 'classification',
+        title: 'Classification of Living Things',
+        summary: 'Kingdoms and taxonomy.',
+        content: `
+<p>Living things are classified into 5 (or 6) kingdoms: Monera, Protista, Fungi, Plantae, Animalia (sometimes Archaea added separately).</p>
+<div class="example"><strong>Example:</strong> Humans belong to which kingdom?  
+<details><summary>Solution</summary>
+Answer: <strong>Animalia</strong>.
+</details></div>
+        `
+      },
+      {
+        id: 'disease',
+        title: 'Health & Disease',
+        summary: 'Causes of disease and immunity.',
+        content: `
+<p><strong>Disease</strong> can be infectious (caused by microbes) or non-infectious (like diabetes).</p>
+<ul>
+  <li><strong>Infectious agents:</strong> Viruses, bacteria, fungi, protozoa.</li>
+  <li><strong>Immunity:</strong> Body’s defense system against disease.</li>
+</ul>
+<div class="example"><strong>Example:</strong> What causes malaria?  
+<details><summary>Solution</summary>
+Malaria is caused by <strong>Plasmodium parasite</strong>, spread by Anopheles mosquitoes.
+</details></div>
+        `
+      }
+    ];
+
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const searchInput = document.getElementById('searchInput');
+
+    function renderSidebar(filter=''){
+      sidebar.innerHTML='';
+      topics.filter(t => t.title.toLowerCase().includes(filter.toLowerCase()) || t.summary.toLowerCase().includes(filter.toLowerCase()))
+        .forEach((t,idx)=>{
+          const el = document.createElement('div');
+          el.className='topic';
+          el.id='topic-'+t.id;
+          el.innerHTML = `<strong>${t.title}</strong><div style="font-size:0.9rem;color:var(--muted)">${t.summary}</div>`;
+          el.onclick = ()=>selectTopic(t.id);
+          sidebar.appendChild(el);
+        });
+    }
+
+    function selectTopic(id){
+      const t = topics.find(x=>x.id===id);
+      if(!t) return;
+      document.querySelectorAll('.topic').forEach(el=>el.classList.remove('active'));
+      const active = document.getElementById('topic-'+id);
+      if(active) active.classList.add('active');
+      content.innerHTML = `
+        <h1>${t.title}</h1>
+        <div class="meta">Beginner-friendly explanation • Examples & Solutions</div>
+        <div>${t.content}</div>
+      `;
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    searchInput.addEventListener('input', (e)=>{ renderSidebar(e.target.value); });
+
+    renderSidebar();
+    if(topics.length) selectTopic(topics[0].id);
+  </script>
+</body>
+</html>
