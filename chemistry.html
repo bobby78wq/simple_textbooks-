@@ -1,0 +1,319 @@
+<!-- Simple Chemistry Textbook (Single-file)
+     Save this as `chemistry.html` and open in your browser.
+     Purpose: Beginner-friendly, simple navigation by topic, with explanations and examples.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chemistry Textbook</title>
+  <header>
+  <div class="wrap top">
+    <div class="logo">Simple Textbook</div>
+    <nav style="margin-left:auto; display:flex; gap:16px;">
+      <a href="index.html" style="color:rgb(20, 19, 19); text-decoration:none; font-weight:500;">Physics</a>
+      <a href="chemistry.html" style="color:rgb(26, 24, 24); text-decoration:none; font-weight:500;">Chemistry</a>
+    </nav>
+  </div>
+</header>
+  <style>
+    :root{--bg:#f7fafc;--card:#ffffff;--muted:#6b7280;--accent:#0ea5a4}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; margin:0; background:var(--bg); color:#111}
+    header{background:linear-gradient(90deg,#f97316,#f43f5e); color:#fff; padding:18px 20px}
+    .wrap{max-width:1000px;margin:20px auto;padding:0 16px}
+    .top{display:flex;align-items:center;gap:16px}
+    .logo{font-weight:700;font-size:1.15rem}
+    .search{margin-left:auto}
+    input[type=search]{padding:8px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);min-width:160px}
+
+    main{display:grid;grid-template-columns:250px 1fr;gap:18px;margin-top:16px}
+    nav{background:var(--card);border-radius:12px;padding:12px;border:1px solid rgba(0,0,0,0.04)}
+    .topic{padding:10px;border-radius:8px;cursor:pointer;margin-bottom:6px}
+    .topic:hover{background:rgba(2,6,23,0.03)}
+    .topic.active{background:linear-gradient(90deg,rgba(236,72,153,0.12),rgba(251,146,60,0.08));border-left:4px solid var(--accent);}
+
+    article{background:var(--card);border-radius:12px;padding:20px;border:1px solid rgba(0,0,0,0.04)}
+    h1{margin:0 0 8px}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:12px}
+    .example{background:#f1f5f9;padding:12px;border-radius:8px;margin-top:12px}
+
+    footer{max-width:1000px;margin:24px auto 80px;padding:0 16px;color:var(--muted);font-size:0.9rem}
+
+    @media (max-width:760px){main{grid-template-columns:1fr;}.search{display:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <div class="logo">Simple Chemistry Textbook</div>
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Search chemistry topics..." />
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main>
+      <nav id="sidebar">
+        <!-- topics injected by JS -->
+      </nav>
+      <article id="content">
+        <!-- content injected by JS -->
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    🤣😎 bobby bee
+  </footer>
+
+  <script>
+    const topics = [
+      {
+        id: 'atoms',
+        title: 'Atoms & Molecules',
+        summary: 'Basic building blocks of matter.',
+        content: `
+<p><strong>Atom:</strong> An atom is the smallest unit of matter that keeps the properties of an element.
+Imagine atoms like tiny building blocks (like LEGO bricks) that make up everything around you: air, water, plants, and even your body.
+Each atom has 3 main parts:
+Protons → positive charge (+)
+Neutrons → no charge (neutral)
+Electrons → negative charge (–)
+The protons and neutrons are in the nucleus (center), while electrons move around the nucleus in orbits.</p>
+<p><strong>Molecule:</strong>A molecule is formed when two or more atoms join together (bond).
+
+Molecules are the smallest unit of a compound that still keeps its chemical properties.
+Example:
+Water (H₂O) → 2 hydrogen atoms + 1 oxygen atom.
+Oxygen gas (O₂) → 2 oxygen atoms joined together.
+So, atoms are the building blocks, and molecules are like groups of those blocks stuck together..</p>
+<p><strong>Atom:</strong> Smallest unit of matter with protons, neutrons, electrons.</p>
+<p><strong>Molecule:</strong> Two or more atoms bonded together (H₂O, CO₂).</p>
+<div class="example"><strong>Example:</strong> How many atoms in CO₂?</div>
+<details><summary>Solution</summary>
+C = 1 atom, O = 2 atoms → total = 3 atoms.
+</details>
+<div class="example"><strong>Example 2:</strong> Write molecular formula of water.</div>
+<details><summary>Solution</summary>
+2 hydrogen + 1 oxygen → H₂O.
+</details>
+        `
+      },
+      {
+        id: 'periodic',
+        title: 'Periodic Table Basics',
+        summary: 'Elements organized by properties.',
+        content: `
+<p>The periodic table organizes elements by atomic number.</p>
+<ul>
+<li><strong>Groups:</strong> The Periodic Table is a chart that organizes all the known chemical elements in a way that shows their properties, similarities, and differences. It is one of the most important tools in chemistry.
+
+🔹 What is the Periodic Table?
+
+It is a systematic arrangement of elements based on their atomic number (the number of protons in the nucleus).
+
+Elements are placed in rows (periods) and columns (groups/families).
+
+The table helps predict the behavior, reactivity, and bonding of elements.
+
+🔹 Types of Elements in the Periodic Table
+
+Elements are broadly divided into categories:
+
+Metals
+
+Found on the left and center of the table.
+
+Good conductors of heat and electricity.
+
+Usually shiny, malleable, and form positive ions (cations).
+
+Example: Iron (Fe), Copper (Cu), Gold (Au).
+
+Non-Metals
+
+Found on the right side of the table.
+
+Poor conductors, brittle in solid form.
+
+Form negative ions (anions) and covalent bonds.
+
+Example: Oxygen (O), Carbon (C), Sulfur (S).
+
+Metalloids
+
+Found along the “stair-step line” (between metals and non-metals).
+
+Have properties of both metals and non-metals.
+
+Example: Boron (B), Silicon (Si), Arsenic (As).
+
+Noble Gases
+
+Group 18 elements.
+
+Inert (do not easily react).
+
+Example: Helium (He), Neon (Ne), Argon (Ar).
+
+Transition Metals
+
+Middle block (groups 3–12).
+
+Can form colorful compounds, often used in industries.
+
+Example: Iron (Fe), Nickel (Ni), Copper (Cu).
+
+Lanthanides and Actinides
+
+Two separate rows at the bottom.
+
+Lanthanides: rare-earth elements (used in electronics).
+
+Actinides: mostly radioactive (like Uranium).
+
+🔹 All Elements in the Periodic Table
+
+Currently, there are 118 confirmed elements (from Hydrogen (H) to Oganesson (Og)).
+Here’s a simplified list:
+
+Hydrogen (H) → Helium (He)
+
+Lithium (Li) → Neon (Ne)
+
+Sodium (Na) → Argon (Ar)
+
+Potassium (K) → Krypton (Kr)
+
+Rubidium (Rb) → Xenon (Xe)
+
+Cesium (Cs) → Radon (Rn)
+
+Francium (Fr) → Oganesson (Og)
+
+And many in between like Carbon (C), Nitrogen (N), Oxygen (O), Iron (Fe), Copper (Cu), Gold (Au), Silver (Ag), Uranium (U), etc.</li>
+</ul>
+<div class="example"><strong>Example:</strong> Which group are noble gases in?</div>
+<details><summary>Solution</summary>
+Group 18 → He, Ne, Ar, Kr, Xe, Rn.
+</details>
+        `
+      },
+      {
+        id: 'chemical-bonding',
+        title: 'Chemical Bonding',
+        summary: 'Ionic and covalent bonds.',
+        content: `
+<p><strong>Ionic bond:</strong>1.Happens when electrons are transferred from one atom to another.<br>
+2.Usually between a metal and a non-metal.<br>
+3.The metal loses electrons → becomes a positive ion (cation).<br>
+4.The non-metal gains electrons → becomes a negative ion (anion).<br>
+5.The opposite charges attract, forming an ionic bond (NaCl).</p>
+<p><strong>Covalent bond:</strong> 1.Happens when atoms share electrons.<br>
+2.Usually between non-metals.<br>
+3.Each atom contributes electrons to share, so both have a full outer shell.<br>
+4.Forms molecules instead of ions</p>
+<div class="example"><strong>Example:</strong> Is NaCl ionic or covalent?</div>
+<details><summary>Solution</summary>
+Na (metal) + Cl (nonmetal) → Ionic.
+</details>
+<div class="example"><strong>Example 2:</strong> Find type of bond in H₂O.</div>
+<details><summary>Solution</summary>
+O shares electrons with 2 H → Covalent.
+</details>
+        `
+      },
+      {
+        id: 'reactions',
+        title: 'Chemical Reactions',
+        summary: 'Reactants → Products with new properties.',
+        content: `
+<p>General: Reactants → Products.</p>
+<p><strong>Types:</strong> Combination, decomposition, displacement, combustion.</p>
+<div class="example"><strong>Example:</strong> 2H₂ + O₂ → ?</div>
+<details><summary>Solution</summary>
+Forms 2H₂O (water).
+</details>
+<div class="example"><strong>Example 2:</strong> CaCO₃ → CaO + CO₂. What type?</div>
+<details><summary>Solution</summary>
+Decomposition reaction.
+</details>
+        `
+      },
+      {
+        id: 'acids-bases',
+        title: 'Acids & Bases',
+        summary: 'pH scale, neutralization.',
+        content: `
+<p><strong>Acids:</strong> Sour, pH < 7 (HCl, H₂SO₄).</p>
+<p><strong>Bases:</strong> Bitter, pH > 7 (NaOH, KOH).</p>
+<p><strong>Neutralization:</strong> Acid + Base → Salt + Water.</p>
+<div class="example"><strong>Example:</strong> HCl + NaOH → ?</div>
+<details><summary>Solution</summary>
+NaCl + H₂O.
+</details>
+<div class="example"><strong>Example 2:</strong> What is pH of pure water?</div>
+<details><summary>Solution</summary>
+pH = 7 (neutral).
+</details>
+        `
+      },
+      {
+        id: 'stoichiometry',
+        title: 'Stoichiometry',
+        summary: 'Balancing equations and mole ratios.',
+        content: `
+<p><strong>Law of conservation:</strong> Mass is conserved in reactions.</p>
+<p><strong>Balancing:</strong> Equal atoms on both sides.</p>
+<div class="example"><strong>Example:</strong> Balance: H₂ + O₂ → H₂O.</div>
+<details><summary>Solution</summary>
+2H₂ + O₂ → 2H₂O.
+</details>
+<div class="example"><strong>Example 2:</strong> How many moles of O₂ needed for 4 moles of H₂?</div>
+<details><summary>Solution</summary>
+Equation: 2H₂ + O₂ → 2H₂O → Ratio 2:1 → 4 moles H₂ needs 2 moles O₂.
+</details>
+        `
+      }
+    ];
+
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const searchInput = document.getElementById('searchInput');
+
+    function renderSidebar(filter=''){
+      sidebar.innerHTML='';
+      topics.filter(t => t.title.toLowerCase().includes(filter.toLowerCase()) || t.summary.toLowerCase().includes(filter.toLowerCase()))
+        .forEach((t,idx)=>{
+          const el = document.createElement('div');
+          el.className='topic';
+          el.id='topic-'+t.id;
+          el.innerHTML = `<strong>${t.title}</strong><div style="font-size:0.9rem;color:var(--muted)">${t.summary}</div>`;
+          el.onclick = ()=>selectTopic(t.id);
+          sidebar.appendChild(el);
+        });
+    }
+
+    function selectTopic(id){
+      const t = topics.find(x=>x.id===id);
+      if(!t) return;
+      document.querySelectorAll('.topic').forEach(el=>el.classList.remove('active'));
+      const active = document.getElementById('topic-'+id);
+      if(active) active.classList.add('active');
+      content.innerHTML = `
+        <h1>${t.title}</h1>
+        <div class="meta">Beginner-friendly explanation • Examples & Solutions</div>
+        <div>${t.content}</div>
+      `;
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    searchInput.addEventListener('input', (e)=>{ renderSidebar(e.target.value); });
+
+    renderSidebar();
+    if(topics.length) selectTopic(topics[0].id);
+  </script>
+</body>
+</html>

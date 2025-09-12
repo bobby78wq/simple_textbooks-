@@ -1,0 +1,324 @@
+<!-- Simple Physics Textbook (Single-file)
+     Save this as `index.html` and open in your browser.
+     Purpose: Beginner-friendly, simple navigation by topic, longer explanations with examples.
+-->
+<!doctype html>
+<html lang="en">
+<header>
+  <div class="wrap top">
+    <div class="logo">Simple Textbook</div>
+    <nav style="margin-left:auto; display:flex; gap:16px;">
+      <a href="index.html" style="color:rgb(20, 19, 19); text-decoration:none; font-weight:500;">Physics</a>
+      <a href="chemistry.html" style="color:rgb(26, 24, 24); text-decoration:none; font-weight:500;">Chemistry</a>
+    </nav>
+  </div>
+</header>
+
+  <style>
+    :root{--bg:#f7fafc;--card:#ffffff;--muted:#6b7280;--accent:#0ea5a4}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; margin:0; background:var(--bg); color:#111}
+    header{background:linear-gradient(90deg,#06b6d4,#60a5fa); color:#fff; padding:18px 20px}
+    .wrap{max-width:1000px;margin:20px auto;padding:0 16px}
+    .top{display:flex;align-items:center;gap:16px}
+    .logo{font-weight:700;font-size:1.15rem}
+    .search{margin-left:auto}
+    input[type=search]{padding:8px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);min-width:160px}
+
+    main{display:grid;grid-template-columns:250px 1fr;gap:18px;margin-top:16px}
+    nav{background:var(--card);border-radius:12px;padding:12px;border:1px solid rgba(0,0,0,0.04)}
+    .topic{padding:10px;border-radius:8px;cursor:pointer;margin-bottom:6px}
+    .topic:hover{background:rgba(2,6,23,0.03)}
+    .topic.active{background:linear-gradient(90deg,rgba(14,165,164,0.12),rgba(96,165,250,0.06));border-left:4px solid var(--accent);}
+
+    article{background:var(--card);border-radius:12px;padding:20px;border:1px solid rgba(0,0,0,0.04)}
+    h1{margin:0 0 8px}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:12px}
+    .example{background:#f1f5f9;padding:12px;border-radius:8px;margin-top:12px}
+
+    footer{max-width:1000px;margin:24px auto 80px;padding:0 16px;color:var(--muted);font-size:0.9rem}
+
+    @media (max-width:760px){main{grid-template-columns:1fr;}.search{display:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <div class="logo">Simple Physics Textbook</div>
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Search topics or keywords..." />
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main>
+      <nav id="sidebar">
+        <!-- topics injected by JS -->
+      </nav>
+
+      <article id="content">
+        <!-- content injected by JS -->
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    Tip: Click topics on the left to load beginner-friendly explanations and examples.
+  </footer>
+
+  <script>
+    const topics = [
+      {
+        id: 'motion',
+        title: 'Motion (Kinematics)',
+        summary: 'How objects move: position, speed, velocity, and acceleration.',
+        content: `
+<p><strong>Motion</strong> is the change of position with time. It helps explain how cars drive, how balls fall, or how planets orbit.</p>
+<p><strong>Key ideas:</strong></p>
+<ul>
+  <li><strong>Position (x):</strong> Location of an object.</li>
+  <li><strong>Displacement:</strong> Change in position.</li>
+  <li><strong>Speed:</strong> Distance covered per unit time.</li>
+  <li><strong>Velocity:</strong> Speed with direction.</li>
+  <li><strong>Acceleration:</strong> Rate of change of velocity.</li>
+</ul>
+<p><strong>Equations (constant acceleration):</strong></p>
+<ul>
+  <li>v = v₀ + at</li>
+  <li>x = x₀ + v₀t + ½at²</li>
+  <li>v² = v₀² + 2a(x - x₀)</li>
+</ul>
+<div class="example"><strong>Example 1:</strong> A bike accelerates from rest at 1.5 m/s² for 6 s. Final speed = 0 + 1.5*6 = 9 m/s.
+  <details><summary>Solution (step-by-step)</summary>
+  1) Identify v₀ = 0, a = 1.5 m/s², t = 6 s.  
+  2) Use v = v₀ + at → v = 0 + (1.5)(6) = 9 m/s.
+  </details>
+</div>
+<div class="example"><strong>Example 2:</strong> A car moving at 20 m/s brakes with acceleration -4 m/s². How long to stop and how far does it travel?
+  <details><summary>Solution</summary>
+  1) Use v = v₀ + at with v = 0 → 0 = 20 + (-4)t → t = 5 s.  
+  2) Use x = x₀ + v₀t + ½at² → x = 0 + 20*5 + 0.5*(-4)*25 = 100 - 50 = 50 m.
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'forces',
+        title: 'Forces & Newton\'s Laws',
+        summary: 'Why objects speed up, slow down, or keep moving.',
+        content: `
+<p><strong>Force</strong> is a push or pull. Newton's laws describe motion under forces.</p>
+<ol>
+<li><strong>1st law:</strong> Objects remain at rest or in uniform motion unless acted on by a force.</li>
+<li><strong>2nd law:</strong> F = ma — force equals mass × acceleration.</li>
+<li><strong>3rd law:</strong> Every action has an equal and opposite reaction.</li>
+</ol>
+<div class="example"><strong>Example:</strong> A 5 kg object pushed with 20 N accelerates at a = F/m = 20/5 = 4 m/s².
+  <details><summary>Solution</summary>
+  1) Identify F = 20 N, m = 5 kg.  
+  2) Use a = F/m → a = 20/5 = 4 m/s².
+  </details>
+</div>
+<div class="example"><strong>Example (friction):</strong> A 10 kg block on a horizontal surface has a 3 N push and friction of 1 N. Find acceleration.
+  <details><summary>Solution</summary>
+  1) Net force: F_net = 3 - 1 = 2 N.  
+  2) a = F_net / m = 2 / 10 = 0.2 m/s².
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'energy',
+        title: 'Energy & Work',
+        summary: 'Kinetic, potential energy, conservation, and work.',
+        content: `
+<p><strong>Kinetic energy:</strong> Energy of motion, KE = ½mv².</p>
+<p><strong>Potential energy:</strong> Stored energy due to position, PE = mgh.</p>
+<p><strong>Work:</strong> W = Fd cos(θ).</p>
+<p><strong>Law of conservation:</strong> Energy cannot be created or destroyed, only transformed.</p>
+<div class="example"><strong>Example:</strong> Lifting a 10 kg box by 2 m: PE = 10*9.8*2 = 196 J.
+  <details><summary>Solution</summary>
+  1) m = 10 kg, g ≈ 9.8 m/s², h = 2 m.  
+  2) PE = mgh = 10 * 9.8 * 2 = 196 J.
+  </details>
+</div>
+<div class="example"><strong>Example (energy conversion):</strong> A 2 kg ball dropped from 5 m. Find speed just before impact using energy conservation.
+  <details><summary>Solution</summary>
+  1) PE_initial = mgh = 2 * 9.8 * 5 = 98 J.  
+  2) KE_final = PE_initial → ½ m v² = 98 → v² = (2*98)/2 = 98 → v = √98 ≈ 9.9 m/s.
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'waves',
+        title: 'Waves & Sound',
+        summary: 'Energy transfer through vibrations.',
+        content: `
+<p><strong>Waves</strong> transfer energy without moving matter long distances. Sound is a wave that travels through air as vibrations.</p>
+<ul>
+  <li><strong>Wavelength (λ):</strong> Distance between peaks.</li>
+  <li><strong>Frequency (f):</strong> Number of waves per second (Hz).</li>
+  <li><strong>Amplitude:</strong> Height of the wave, related to energy.</li>
+  <li>Wave speed: v = fλ.</li>
+</ul>
+<div class="example"><strong>Example:</strong> A water wave has f = 2 Hz and λ = 0.5 m. Find speed.
+  <details><summary>Solution</summary>
+  1) v = fλ = 2 * 0.5 = 1 m/s.
+  </details>
+</div>
+<div class="example"><strong>Example (sound):</strong> A tuning fork produces 440 Hz and speed of sound is 343 m/s. Find wavelength.
+  <details><summary>Solution</summary>
+  1) λ = v / f = 343 / 440 ≈ 0.78 m.
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'electricity',
+        title: 'Electricity & Circuits',
+        summary: 'Charge, current, voltage, resistance, and Ohm\'s law.',
+        content: `
+<p><strong>Charge (q):</strong> Property of matter that causes electric force.</p>
+<p><strong>Current (I):</strong> Flow of charge per second, I = q/t.</p>
+<p><strong>Voltage (V):</strong> Energy per unit charge.</p>
+<p><strong>Resistance (R):</strong> Opposition to current.</p>
+<p><strong>Ohm's law:</strong> V = IR.</p>
+<div class="example"><strong>Example:</strong> A 12 V battery with a 6 Ω resistor gives I = 12/6 = 2 A.
+  <details><summary>Solution</summary>
+  1) V = 12 V, R = 6 Ω.  
+  2) I = V/R = 12 / 6 = 2 A.
+  </details>
+</div>
+<div class="example"><strong>Example (series resistors):</strong> Two resistors, 4 Ω and 6 Ω, in series with 10 V. Find total current.
+  <details><summary>Solution</summary>
+  1) R_total = 4 + 6 = 10 Ω.  
+  2) I = V / R_total = 10 / 10 = 1 A.
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'thermo',
+        title: 'Thermodynamics (Intro)',
+        summary: 'Heat, temperature, and energy transfer.',
+        content: `
+<p><strong>Temperature:</strong> Measure of average kinetic energy of particles.</p>
+<p><strong>Heat:</strong> Energy transfer from hot to cold.</p>
+<p><strong>First law:</strong> ΔU = Q - W (energy conservation).</p>
+<p><strong>Second law:</strong> Entropy of isolated systems increases.</p>
+<div class="example"><strong>Example:</strong> Heating 1 kg of water (c ≈ 4186 J/kg·°C) by 10°C. Find heat required.
+  <details><summary>Solution</summary>
+  1) Q = mcΔT = 1 * 4186 * 10 = 41860 J ≈ 41.9 kJ.
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'optics',
+        title: 'Optics (Light)',
+        summary: 'Reflection, refraction, and lenses.',
+        content: `
+<p><strong>Light</strong> behaves as both waves and particles. Optics studies how light interacts with surfaces and materials.</p>
+<ul>
+  <li><strong>Reflection:</strong> Angle in = angle out.</li>
+  <li><strong>Refraction:</strong> Bending of light when changing medium (Snell's law: n₁sinθ₁ = n₂sinθ₂).</li>
+  <li><strong>Lenses:</strong> Focus or spread light (convex/concave).</li>
+</ul>
+<div class="example"><strong>Example:</strong> Light from air (n≈1) enters glass (n≈1.5) at 30°. Find refraction angle.
+  <details><summary>Solution</summary>
+  1) n₁sinθ₁ = n₂sinθ₂ → sinθ₂ = (n₁/n₂)sinθ₁ = (1/1.5)sin30° = (2/3)*0.5 = 1/3.  
+  2) θ₂ = arcsin(1/3) ≈ 19.5°.
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'modern',
+        title: 'Modern Physics',
+        summary: 'Atomic models, relativity, and quantum basics.',
+        content: `
+<p><strong>Modern physics</strong> explores phenomena beyond classical mechanics.</p>
+<ul>
+  <li><strong>Relativity:</strong> Time and space are relative; E=mc².</li>
+  <li><strong>Quantum mechanics:</strong> Energy is quantized; particles behave like waves.</li>
+  <li><strong>Atomic structure:</strong> Atoms consist of protons, neutrons, electrons.</li>
+</ul>
+<div class="example"><strong>Example (photoelectric effect):</strong> Light of frequency f ejects electrons if hf exceeds work function Φ. If hf = Φ + K_max, K_max is the kinetic energy of ejected electrons.
+  <details><summary>Solution</summary>
+  1) Identify hf and Φ.  
+  2) K_max = hf - Φ.
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'gravitation',
+        title: 'Gravitation',
+        summary: 'Universal law of gravitation and planetary motion.',
+        content: `
+<p><strong>Gravitation</strong> is the force of attraction between masses. Newton's law: F = Gm₁m₂/r².</p>
+<p>It explains why objects fall, why the Moon orbits Earth, and why planets orbit the Sun.</p>
+<div class="example"><strong>Example:</strong> Force on 1 kg mass near Earth surface ≈ 9.8 N.
+  <details><summary>Solution</summary>
+  1) Weight W = mg = 1 * 9.8 = 9.8 N.
+  </details>
+</div>
+        `
+      },
+      {
+        id: 'magnetism',
+        title: 'Magnetism',
+        summary: 'Magnets, magnetic fields, and electromagnetism.',
+        content: `
+<p><strong>Magnetism</strong> arises from moving charges. Magnetic fields influence other charges and magnets.</p>
+<p>Electromagnetism unifies electricity and magnetism: currents create magnetic fields, and changing magnetic fields create currents (Faraday's law).</p>
+<div class="example"><strong>Example:</strong> A compass needle aligns with Earth's magnetic field.
+  <details><summary>Solution</summary>
+  1) The needle is a small magnet; torque aligns it with field lines showing direction of the field.
+  </details>
+</div>
+        `
+      }
+    ];
+
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const searchInput = document.getElementById('searchInput');
+
+    function renderSidebar(filter=''){
+      sidebar.innerHTML='';
+      topics.filter(t => t.title.toLowerCase().includes(filter.toLowerCase()) || t.summary.toLowerCase().includes(filter.toLowerCase()))
+        .forEach((t,idx)=>{
+          const el = document.createElement('div');
+          el.className='topic';
+          el.id='topic-'+t.id;
+          el.innerHTML = `<strong>${t.title}</strong><div style="font-size:0.9rem;color:var(--muted)">${t.summary}</div>`;
+          el.onclick = ()=>selectTopic(t.id);
+          sidebar.appendChild(el);
+        });
+    }
+
+    function selectTopic(id){
+      const t = topics.find(x=>x.id===id);
+      if(!t) return;
+      document.querySelectorAll('.topic').forEach(el=>el.classList.remove('active'));
+      const active = document.getElementById('topic-'+id);
+      if(active) active.classList.add('active');
+      content.innerHTML = `
+        <h1>${t.title}</h1>
+        <div class="meta">Beginner-friendly explanation • Examples & Solutions</div>
+        <div>${t.content}</div>
+      `;
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    searchInput.addEventListener('input', (e)=>{ renderSidebar(e.target.value); });
+
+    renderSidebar();
+    if(topics.length) selectTopic(topics[0].id);
+
+  </script>
+</body>
+</html>
