@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Simple Textbook</title>
+  <style>
+    :root{
+      --bg:#f8fafc; --card:#fff; --accent:#0ea5a4; --muted:#64748b;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:#111;}
+    header{background:linear-gradient(90deg,#06b6d4,#3b82f6);color:#fff;padding:20px;text-align:center;}
+    header h1{margin:0;font-size:2rem;}
+    header p{margin:6px 0 0;color:#e0f2fe;}
+
+    main{max-width:1000px;margin:40px auto;padding:0 20px;text-align:center;}
+    .subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:30px;}
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:24px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.06);
+      transition:transform 0.2s,box-shadow 0.2s;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 8px 18px rgba(0,0,0,0.1);
+    }
+    .card h2{margin:0 0 10px;color:var(--accent);}
+    .card p{color:var(--muted);font-size:0.95rem;margin-bottom:16px;}
+    .card a{
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:8px;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:500;
+      transition:background 0.2s;
+    }
+    .card a:hover{background:#089191;}
+
+    footer{margin:50px 0;text-align:center;color:var(--muted);font-size:0.9rem;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📘 Simple Science Textbook</h1>
+    <p>Choose a subject to start learning</p>
+  </header>
+
+  <main>
+    <div class="subjects">
+      <div class="card">
+        <h2>Physics</h2>
+        <p>Learn about motion, forces, energy, waves, electricity and more with examples & solutions.</p>
+        <a href="physics.html">Open Physics</a>
+      </div>
+
+      <div class="card">
+        <h2>Chemistry</h2>
+        <p>Understand atoms, reactions, acids & bases, periodic table and real-life chemistry concepts.</p>
+        <a href="chemistry.html">Open Chemistry</a>
+      </div>
+
+      <div class="card">
+        <h2>Biology</h2>
+        <p>Explore cells, genetics, evolution, ecology, human body systems and health with examples.</p>
+        <a href="biology.html">Open Biology</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Simple Science Textbook — Made for easy learning
+  </footer>
+</body>
+</html>
